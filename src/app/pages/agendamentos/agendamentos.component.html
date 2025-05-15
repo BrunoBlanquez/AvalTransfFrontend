@@ -1,1 +1,28 @@
-<p>agendamentos works!</p>
+<h2>Agendamento de Transferência</h2>
+
+<form (ngSubmit)="agendar()" #form="ngForm">
+  <input name="contaOrigem" [(ngModel)]="novaTransferencia.contaOrigem" placeholder="Conta de Origem" required />
+  <input name="contaDestino" [(ngModel)]="novaTransferencia.contaDestino" placeholder="Conta de Destino" required />
+  <input type="number" name="valor" [(ngModel)]="novaTransferencia.valor" placeholder="Valor" required />
+  <input type="date" name="dataTransferencia" [(ngModel)]="novaTransferencia.dataTransferencia" required />
+  <button type="submit">Agendar</button>
+</form>
+
+<h3>Transferências Agendadas</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Origem</th><th>Destino</th><th>Valor</th><th>Taxa</th><th>Agendamento</th><th>Transferência</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of transferencias">
+      <td>{{ t.contaOrigem }}</td>
+      <td>{{ t.contaDestino }}</td>
+      <td>{{ t.valor }}</td>
+      <td>{{ t.taxa }}</td>
+      <td>{{ t.dataAgendamento }}</td>
+      <td>{{ t.dataTransferencia }}</td>
+    </tr>
+  </tbody>
+</table>
