@@ -19,10 +19,10 @@
     <tr *ngFor="let t of transferencias">
       <td>{{ t.contaOrigem }}</td>
       <td>{{ t.contaDestino }}</td>
-      <td>{{ t.valor }}</td>
-      <td>{{ t.taxa }}</td>
-      <td>{{ t.dataAgendamento }}</td>
-      <td>{{ t.dataTransferencia }}</td>
+      <td>R$ {{ t.valor }}</td>
+      <td>R$ {{ t.taxa }}</td>
+      <td>{{ t.dataAgendamento | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ t.dataTransferencia | date: 'dd/MM/yyyy' }}</td>
     </tr>
   </tbody>
 </table>
