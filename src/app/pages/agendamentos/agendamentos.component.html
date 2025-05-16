@@ -1,18 +1,22 @@
 <h2>Agendamento de Transferência</h2>
 
 <form (ngSubmit)="agendar()" #form="ngForm">
-  <input name="contaOrigem" [(ngModel)]="novaTransferencia.contaOrigem" placeholder="Conta de Origem" required />
-  <input name="contaDestino" [(ngModel)]="novaTransferencia.contaDestino" placeholder="Conta de Destino" required />
-  <input type="number" name="valor" [(ngModel)]="novaTransferencia.valor" placeholder="Valor" required />
+  <input type="number" name="contaOrigem" [(ngModel)]="novaTransferencia.contaOrigem" placeholder="Conta de Origem" (focus)="fecharMensagemErro()" required />
+  <input type="number" name="contaDestino" [(ngModel)]="novaTransferencia.contaDestino" placeholder="Conta de Destino" required />
+  <input type="number" name="valor" [(ngModel)]="novaTransferencia.valor" placeholder="Valor" required min="0.01" step="0.01" />
   <input type="date" name="dataTransferencia" [(ngModel)]="novaTransferencia.dataTransferencia" required />
   <button type="submit">Agendar</button>
 </form>
+
+<div *ngIf="erro" class="erro-mensagem">
+  <span>{{ erro }}</span>
+</div>
 
 <h3>Transferências Agendadas</h3>
 <table>
   <thead>
     <tr>
-      <th>Origem</th><th>Destino</th><th>Valor</th><th>Taxa</th><th>Agendamento</th><th>Transferência</th>
+      <th>Origem</th><th>Destino</th><th>Valor</th><th>Taxa</th><th>Data da Transação</th><th>Data Agendada</th>
     </tr>
   </thead>
   <tbody>

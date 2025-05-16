@@ -1,6 +1,6 @@
 export interface Transferencia {
-  contaOrigem: string;
-  contaDestino: string;
+  contaOrigem: number;
+  contaDestino: number;
   valor: number;
   dataTransferencia: string;
   dataAgendamento?: string;

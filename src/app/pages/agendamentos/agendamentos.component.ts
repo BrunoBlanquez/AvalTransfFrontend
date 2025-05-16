@@ -8,15 +8,17 @@ import { CommonModule } from '@angular/common';
   selector: 'app-agendamentos',
   imports: [CommonModule, FormsModule],
   templateUrl: './agendamentos.component.html',
-  styleUrl: './agendamentos.component.css'
+  styleUrl: './agendamentos.component.css',
 })
 export class AgendamentosComponent {
   novaTransferencia: Transferencia = {
-    contaOrigem: '',
-    contaDestino: '',
+    contaOrigem: 0,
+    contaDestino: 0,
     valor: 0,
-    dataTransferencia: ''
+    dataTransferencia: '',
   };
+
+  erro: string | null = null;
 
   transferencias: Transferencia[] = [];
 
@@ -37,13 +39,26 @@ export class AgendamentosComponent {
       next: (t) => {
         this.transferencias.push(t);
         this.novaTransferencia = {
-          contaOrigem: '',
-          contaDestino: '',
+          contaOrigem: 0,
+          contaDestino: 0,
           valor: 0,
-          dataTransferencia: ''
+          dataTransferencia: '',
         };
       },
-      error: (err) => alert('Erro ao agendar transferência: ' + err.message)
+      error: (err) => {
+        console.log('Erro: ' + err.error);
+        this.erro = err?.error || 'Erro ao agendar transferência.';
+      },
     });
+  }
+
+  fecharMensagemErro() {
+    this.novaTransferencia = {
+      contaOrigem: 0,
+      contaDestino: 0,
+      valor: 0,
+      dataTransferencia: '',
+    };
+    this.erro = null;
   }
 }
