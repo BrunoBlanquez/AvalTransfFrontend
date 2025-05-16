@@ -13,12 +13,12 @@ Este projeto faz parte de um teste técnico para um processo seletivo e é compo
 
 ### 🖥️ Backend (Spring Boot)
 
-1. Acesse o diretório do frontend:
+1. Acesse o diretório do frontend:  
   cd frontend
-2. Instale as dependências:
+2. Instale as dependências:  
   npm install
-3. Inicie o servidor de desenvolvimento:
+3. Inicie o servidor de desenvolvimento:  
   ng serve
-4. A aplicação estará disponível em:
+4. A aplicação estará disponível em:  
   http://localhost:4200
 
