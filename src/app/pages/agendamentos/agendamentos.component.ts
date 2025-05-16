@@ -21,6 +21,7 @@ export class AgendamentosComponent {
   erro: string | null = null;
 
   transferencias: Transferencia[] = [];
+  mensagemErro: string | undefined;
 
   constructor(private service: TransferenciasService) {}
 
@@ -35,8 +36,17 @@ export class AgendamentosComponent {
   }
 
   agendar() {
+    this.fecharMensagemErro();
+
     this.service.agendar(this.novaTransferencia).subscribe({
       next: (t) => {
+        if (
+          isNaN(this.novaTransferencia.contaOrigem) ||
+          isNaN(this.novaTransferencia.contaDestino)
+        ) {
+          this.mensagemErro = 'As contas devem conter apenas números.';
+          return;
+        }
         this.transferencias.push(t);
         this.novaTransferencia = {
           contaOrigem: 0,
@@ -46,7 +56,7 @@ export class AgendamentosComponent {
         };
       },
       error: (err) => {
-        console.log('Erro: ' + err.error);
+        console.log('Erro: ' + err);
         this.erro = err?.error || 'Erro ao agendar transferência.';
       },
     });
@@ -60,5 +70,19 @@ export class AgendamentosComponent {
       dataTransferencia: '',
     };
     this.erro = null;
+  }
+
+  bloquearTeclasInvalidasConta(event: KeyboardEvent) {
+    const teclasInvalidas = ['e', 'E', '+', '-', '.', ','];
+    if (teclasInvalidas.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+  bloquearTeclasInvalidasValor(event: KeyboardEvent) {
+    const teclasInvalidas = ['e', 'E', '+', '-'];
+    if (teclasInvalidas.includes(event.key)) {
+      event.preventDefault();
+    }
   }
 }
